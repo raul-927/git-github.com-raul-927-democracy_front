@@ -3,6 +3,7 @@ import {OAuthService } from 'angular-oauth2-oidc';
 import { AppComponent } from 'src/app/app.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from '../../../../services/login.service';
+import { MessageService } from 'src/app/services/message.service';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -13,7 +14,7 @@ export class MenuComponent implements OnInit, OnChanges{
   isLogged?: boolean;
   isAdmin?: boolean;
 
-  constructor(private loginService: LoginService, private route: Router, private oauthService: OAuthService, private appComponent: AppComponent){
+  constructor(private messageService: MessageService, private loginService: LoginService, private route: Router, private oauthService: OAuthService, private appComponent: AppComponent){
 
   }
   ngOnChanges(): void {
@@ -22,31 +23,26 @@ export class MenuComponent implements OnInit, OnChanges{
     this.route.navigateByUrl('/web-site');
   }
   ngOnInit(): void {
-    this.isLogged = this.appComponent.getIsLogged();
+
+    this.messageService.getMessage().subscribe(res =>{
+      if(res['text']!= undefined){
+        this.isLogged = this.appComponent.getIsLogged();
+      }
+    })
 
   }
-
     public login():void{
       this.loginService.login();
-     //this.oauthService.initImplicitFlowInternal();
-      //this.appComponent.login();
-      this.isLogged = this.loginService.getIsLogged();
-
-
-
-
     }
 
     public logout():void{
-      //this.oauthService.logOut();
-      this.appComponent.logout();
+      this.loginService.logout();
+
     }
 
     public application():void{
 
       console.log('LLEGO');
-
-      //routerLink="/application"
       this.route.navigateByUrl('/application');
     }
 

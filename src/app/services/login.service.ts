@@ -8,7 +8,7 @@ export class LoginService {
 
   constructor(private oauthService: OAuthService) { }
 
-  public login(): void {
+  public  login(): void {
     this.oauthService.initImplicitFlowInternal();
   }
 
