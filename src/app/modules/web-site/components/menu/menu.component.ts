@@ -20,7 +20,6 @@ export class MenuComponent implements OnInit, OnChanges{
   ngOnChanges(): void {
 
     this.isLogged = this.appComponent.getIsLogged();
-    this.route.navigateByUrl('/web-site');
   }
   ngOnInit(): void {
 
@@ -41,9 +40,7 @@ export class MenuComponent implements OnInit, OnChanges{
     }
 
     public application():void{
-
-      console.log('LLEGO');
-      this.route.navigateByUrl('/application');
+      this.route.navigateByUrl('applications');
     }
 
 }

@@ -14,7 +14,7 @@ const routes: Routes = [
     loadChildren: () => import('./modules/web-site/web-site.module').then(m => m.WebSiteModule),
   },
   {
-    path: 'application',
+    path: 'applications',
     loadChildren: () => import('./modules/application/application.module').then(m => m.ApplicationModule),
     canActivate: [authGuard]
   }

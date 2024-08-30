@@ -7,12 +7,18 @@ import { ProductComponent } from './components/product/product.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'product',
+    redirectTo: 'applicationprincipal',
     pathMatch: 'full'
   },
+
   {
-    path: "product",
+    path: "applicationprincipal/product",
     component: ProductComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: "applicationprincipal",
+    component: ApplicationPrincipalComponent,
     canActivate: [authGuard]
   }
 ];
