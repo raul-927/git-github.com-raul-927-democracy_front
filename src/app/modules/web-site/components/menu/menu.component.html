@@ -27,15 +27,11 @@
           <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
         </li>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button [hidden]="!isLogged" class="btn btn-outline-success" type="submit">Search</button>
-      </form>
       <div [hidden]="!isLogged">
         <button  class ="btn btn-outline-success"  (click)="application()">App</button>
       </div>
-      <button class ="btn btn-success" (click)="login()">Login</button>
-      <button class ="btn btn-warning" (click)="logout()">Logout</button>
+      <button [hidden]="isLogged"class ="btn btn-success" (click)="login()">Login</button>
+      <button [hidden]="!isLogged" class ="btn btn-warning" (click)="logout()">Logout</button>
     </div>
   </div>
 </nav>

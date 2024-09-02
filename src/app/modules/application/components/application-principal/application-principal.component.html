@@ -17,7 +17,7 @@
             Dropdown
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" routerLink="product">Product</a></li>
             <li><a class="dropdown-item" href="#">Another action</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
@@ -27,10 +27,7 @@
           <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
         </li>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button [hidden]="!isLogged" class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+
       <button class ="btn btn-success" (click)="product()">Product</button>
       <button class ="btn btn-warning" (click)="logout()">Logout</button>
     </div>
