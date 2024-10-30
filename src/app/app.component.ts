@@ -26,6 +26,7 @@ export class AppComponent {
     issuer: 'http://localhost:8181/realms/democracy_realm',
     redirectUri: window.location.origin,
     clientId: 'democracy_client',
+    dummyClientSecret:'YYcdVQO1lB9F5IjxjN6ljHueBWhZz1aZ',
     responseType: 'code',
     scope: 'openid profile email offline_access',
     showDebugInformation: true,
