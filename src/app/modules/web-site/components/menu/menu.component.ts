@@ -17,30 +17,29 @@ export class MenuComponent implements OnInit, OnChanges{
   constructor(private messageService: MessageService, private loginService: LoginService, private route: Router, private oauthService: OAuthService, private appComponent: AppComponent){
 
   }
-  ngOnChanges(): void {
 
+  ngOnChanges(): void {
     this.isLogged = this.appComponent.getIsLogged();
   }
-  ngOnInit(): void {
 
+  ngOnInit(): void {
     this.messageService.getMessage().subscribe(res =>{
       if(res['text']!= undefined){
         this.isLogged = this.appComponent.getIsLogged();
       }
     })
-
   }
-    public login():void{
-      this.loginService.login();
-    }
 
-    public logout():void{
-      this.loginService.logout();
+  public login():void{
+    this.loginService.login();
+  }
 
-    }
+  public logout():void{
+    this.loginService.logout();
+  }
 
-    public application():void{
-      this.route.navigateByUrl('applications');
-    }
+  public application():void{
+    this.route.navigateByUrl('applications');
+  }
 
 }

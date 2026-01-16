@@ -42,8 +42,8 @@ export class ApplicationPrincipalComponent {
 
     }
 
-    public product():void{
-      this.route.navigate(['/applications/applicationprincipal/product']);
+    public investigationResult():void{
+      this.route.navigate(['/applications/applicationprincipal/investigationresult']);
     }
 
 

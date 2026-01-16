@@ -8,6 +8,7 @@ import { StreetComponent } from './components/street/street.component';
 import { ProfessionComponent } from './components/profession/profession.component';
 import { DepartmentComponent } from './components/department/department.component';
 import { NeighborhoodComponent } from './components/neighborhood/neighborhood.component';
+import { InvestigationResultComponent } from './components/investigation-result/investigation-result.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { NeighborhoodComponent } from './components/neighborhood/neighborhood.co
     StreetComponent,
     ProfessionComponent,
     DepartmentComponent,
-    NeighborhoodComponent
+    NeighborhoodComponent,
+    InvestigationResultComponent
   ],
   imports: [
     CommonModule,

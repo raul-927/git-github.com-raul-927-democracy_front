@@ -61,5 +61,4 @@ export class AppComponent {
     return this.loginService.getIsLogged();
   }
 
-
 }

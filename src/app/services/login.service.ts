@@ -29,8 +29,6 @@ export class LoginService {
     const payload = token.split('.')[1];
     const payloadDecodedJson = atob(payload);
     const payloadDecoded = JSON.parse(payloadDecodedJson);
-    console.log("USERNAME: "+JSON.stringify(payloadDecoded.preferred_username));
-    console.log("ROLES: "+JSON.stringify(payloadDecoded.realm_access.roles));
     return payloadDecoded.realm_access.roles.indexOf('realm-admin') !== -1;
   }
 }

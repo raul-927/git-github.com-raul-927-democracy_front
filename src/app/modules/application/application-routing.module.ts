@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ApplicationPrincipalComponent } from './components/application-principal/application-principal.component';
 import { authGuard } from 'src/app/services/guard/auth.guard';
 import { ProductComponent } from './components/product/product.component';
+import { InvestigationResultComponent } from './components/investigation-result/investigation-result.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,11 @@ const routes: Routes = [
   {
     path: "applicationprincipal",
     component: ApplicationPrincipalComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: "applicationprincipal/investigationresult",
+    component: InvestigationResultComponent,
     canActivate: [authGuard]
   }
 ];
