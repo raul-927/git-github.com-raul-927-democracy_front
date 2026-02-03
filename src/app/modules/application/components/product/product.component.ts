@@ -43,9 +43,7 @@ constructor(private productService: ProductService){
       }
       this.productService.createProduct({body: this.productRequest}).subscribe(res =>{
 
-        console.log("RESULT: "+JSON.stringify(res));
         this.productService.findProduct({body: this.productRequest}).subscribe(res =>{
-          console.log("SELECT-RESULT: "+JSON.stringify(res));
         });
       });
     })

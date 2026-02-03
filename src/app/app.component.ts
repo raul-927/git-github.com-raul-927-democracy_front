@@ -50,7 +50,6 @@ export class AppComponent {
 
   public login():void{
     this.oauthService.initImplicitFlowInternal();
-    console.log('IS_LOGGED_true: '+this.isLogged);
   }
 
   public logout():void{

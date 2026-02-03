@@ -48,7 +48,6 @@ export class ProductService extends BaseService{
   }
 
   createProduct(params?:CreateProduct$Params, context?: HttpContext): Observable<StrictHttpResponse<ProductResponse>> {
-    console.log("PARAMS: "+JSON.stringify(params));
     return createProduct(this.http, this.rootUrl, params, context);
   }
 

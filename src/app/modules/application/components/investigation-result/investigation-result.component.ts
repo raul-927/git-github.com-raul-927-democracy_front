@@ -5,7 +5,8 @@ import { InvestigationResultRequest } from 'src/app/request/investigation-result
 import { ObtainInvestigationResult$Params} from 'src/app/fn/investigationResult/obtain-investigation-result';
 import { ProductTypeEnum } from 'src/app/enums/product-type';
 import { toSignal } from '@angular/core/rxjs-interop';
-
+import { SseService } from 'src/app/services/sse.service';
+import {OAuthService} from 'angular-oauth2-oidc';
 @Component({
   selector: 'app-investigation-result',
   templateUrl: './investigation-result.component.html',
@@ -17,7 +18,7 @@ export class InvestigationResultComponent implements OnInit{
   doubleCount = computed(()=> this.count()*2);
 
 
-  constructor(private investigationResulService: InvestigationResultService, private streetService: StreetService){
+  constructor(private oauthService: OAuthService, private investigationResulService: InvestigationResultService, private streetService: StreetService, private sseService:SseService){
 
   }
 
@@ -27,6 +28,7 @@ export class InvestigationResultComponent implements OnInit{
 
 
   ngOnInit(): void {
+    /*
     this.investigationResulService.getInvestigationResult$Response({body: this.investigationResultRequest}).subscribe(result=>{
       console.log('RESULT: '+JSON.stringify(result.body));
     })
@@ -36,6 +38,12 @@ export class InvestigationResultComponent implements OnInit{
     });
     this.investigationResulService.obtainInvestigationResult$Response({body: this.investigationResultRequest}).subscribe(res =>{
           console.log('RES: '+JSON.stringify(res.body));
+        })*/
+        var token = this.oauthService.getAccessToken();
+        const url = 'http://localhost:8082/humanresources/street/selectp';
+
+        this.sseService.getServerSentEvent(url,token).subscribe(result=>{
+          console.log('RESULT: '+JSON.stringify(result));
         })
   }
 
