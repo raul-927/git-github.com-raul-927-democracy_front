@@ -3,11 +3,15 @@ import { Observable } from 'rxjs';
 import {OAuthService} from 'angular-oauth2-oidc';
 import { HttpClient, HttpRequest, HttpEvent, HttpEventType } from '@angular/common/http';
 import { filter, map } from 'rxjs/operators';
+import { BaseService } from './base-service';
+import { ApiConfiguration } from '../config/api-configuration';
 @Injectable({
   providedIn: 'root'
 })
-export class SseService {
-  constructor(private oauthService: OAuthService, private zone: NgZone, private http: HttpClient) {}
+export class SseService extends BaseService{
+  constructor(config: ApiConfiguration, private oauthService: OAuthService, private zone: NgZone, http: HttpClient) {
+    super(config,http)
+  }
 
   public getServerSentEvent(): Observable<any> {
     const url = 'http://localhost:8082/humanresources/street/select';
