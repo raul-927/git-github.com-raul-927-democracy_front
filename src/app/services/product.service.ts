@@ -8,13 +8,13 @@ import { StrictHttpResponse } from '../utils/strict-http-response';
 import { map, Observable } from 'rxjs';
 import { ProductRequest } from '../request/product-request';
 import { createProduct, CreateProduct$Params } from '../fn/products/create-product';
-import {selectProduct, SelectProduct$Params} from '../fn/products/select-product';
-import {selectCount, SelectCount$Params} from '../fn/products/select-count';
+import { selectProduct, SelectProduct$Params } from '../fn/products/select-product';
+import { selectCount, SelectCount$Params } from '../fn/products/select-count';
 import { ProductResponse } from '../response/product-response';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService extends BaseService{
+export class ProductService extends BaseService {
 
   constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
@@ -25,13 +25,13 @@ export class ProductService extends BaseService{
     return findAllProducts(this.http, this.rootUrl, params, context);
   }
 
-  selectProducts$Response(params?: SelectProduct$Params, context?: HttpContext):Observable<StrictHttpResponse<ProductResponse>>{
+  selectProducts$Response(params?: SelectProduct$Params, context?: HttpContext): Observable<StrictHttpResponse<ProductResponse>> {
     return selectProduct(this.http, this.rootUrl, params, context);
 
   }
 
-  selectCount$Response(params?:SelectCount$Params, context?:HttpContext): Observable<StrictHttpResponse<number>>{
-    return selectCount(this.http, this.rootUrl, params,context);
+  selectCount$Response(params?: SelectCount$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
+    return selectCount(this.http, this.rootUrl, params, context);
   }
 
 
@@ -41,17 +41,17 @@ export class ProductService extends BaseService{
     );
   }
 
-  findProduct(params?: SelectProduct$Params, context?: HttpContext):Observable<ProductResponse> {
-    return this.selectProducts$Response(params,context).pipe(
+  findProduct(params?: SelectProduct$Params, context?: HttpContext): Observable<ProductResponse> {
+    return this.selectProducts$Response(params, context).pipe(
       map((r: StrictHttpResponse<ProductRequest>): ProductRequest => r.body)
     );
   }
 
-  createProduct(params?:CreateProduct$Params, context?: HttpContext): Observable<StrictHttpResponse<ProductResponse>> {
+  createProduct(params?: CreateProduct$Params, context?: HttpContext): Observable<StrictHttpResponse<ProductResponse>> {
     return createProduct(this.http, this.rootUrl, params, context);
   }
 
-  selectCount(params?: SelectCount$Params, context?: HttpContext): Observable<StrictHttpResponse<number>>{
+  selectCount(params?: SelectCount$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
     return selectCount(this.http, this.rootUrl, params, context);
   }
 }

@@ -7,6 +7,7 @@ import { ProductTypeEnum } from 'src/app/enums/product-type';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { SseService } from 'src/app/services/sse.service';
 import {OAuthService} from 'angular-oauth2-oidc';
+import { StreetResultResponse } from 'src/app/response/street-result-response';
 @Component({
   selector: 'app-investigation-result',
   templateUrl: './investigation-result.component.html',
@@ -27,6 +28,8 @@ export class InvestigationResultComponent implements OnInit{
   }
 
 
+
+
   ngOnInit(): void {
     /*
     this.investigationResulService.getInvestigationResult$Response({body: this.investigationResultRequest}).subscribe(result=>{
@@ -39,12 +42,18 @@ export class InvestigationResultComponent implements OnInit{
     this.investigationResulService.obtainInvestigationResult$Response({body: this.investigationResultRequest}).subscribe(res =>{
           console.log('RES: '+JSON.stringify(res.body));
         })*/
-        var token = this.oauthService.getAccessToken();
-        const url = 'http://localhost:8082/humanresources/street/selectp';
 
-        this.sseService.getServerSentEvent(url,token).subscribe(result=>{
-          console.log('RESULT: '+JSON.stringify(result));
+        this.sseService.getServerSentEvent().subscribe(result=>{
+          const valor = result.replace("data:","");
+          const street = JSON.parse(valor);
+          console.log("STREET: "+JSON.stringify(street));
         })
+/*
+        this.sseService.streamData('http://localhost:8082/humanresources/street/select', { filtro: 'valor' }).subscribe({
+          next: (data) => console.log('Nuevo dato:', data),
+          error: (err) => console.error('Error SSE:', err)
+});
+*/
   }
 
 }
