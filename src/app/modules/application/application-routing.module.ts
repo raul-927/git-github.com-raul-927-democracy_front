@@ -4,6 +4,7 @@ import { ApplicationPrincipalComponent } from './components/application-principa
 import { authGuard } from 'src/app/services/guard/auth.guard';
 import { ProductComponent } from './components/product/product.component';
 import { InvestigationResultComponent } from './components/investigation-result/investigation-result.component';
+import { StreetComponent } from './components/street/street.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,11 @@ const routes: Routes = [
   {
     path: "applicationprincipal/investigationresult",
     component: InvestigationResultComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: "applicationprincipal/street",
+    component: StreetComponent,
     canActivate: [authGuard]
   }
 ];

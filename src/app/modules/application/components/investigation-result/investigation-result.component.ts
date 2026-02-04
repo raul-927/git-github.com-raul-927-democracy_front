@@ -43,14 +43,6 @@ export class InvestigationResultComponent implements OnInit{
           console.log('RES: '+JSON.stringify(res.body));
         })*/
 
-        this.sseService.getServerSentEvent().subscribe(result=>{
-          const valor = result.replace("data:","");
-          const street = JSON.parse(valor);
-          console.log("streetId: "+street.streetId);
-          console.log("streetName: "+street.streetName);
-          console.log("streetType: "+street.streetType);
-          console.log("-------------------------------");
-        })
 /*
         this.sseService.streamData('http://localhost:8082/humanresources/street/select', { filtro: 'valor' }).subscribe({
           next: (data) => console.log('Nuevo dato:', data),

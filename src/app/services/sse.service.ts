@@ -1,30 +1,32 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable, NgZone, signal, WritableSignal } from '@angular/core';
 import { Observable } from 'rxjs';
 import {OAuthService} from 'angular-oauth2-oidc';
 import { HttpClient, HttpRequest, HttpEvent, HttpEventType } from '@angular/common/http';
 import { filter, map } from 'rxjs/operators';
 import { BaseService } from './base-service';
 import { ApiConfiguration } from '../config/api-configuration';
+import { StreetResultResponse } from '../response/street-result-response';
 @Injectable({
   providedIn: 'root'
 })
 export class SseService extends BaseService{
+
+public tableData: WritableSignal<StreetResultResponse[]> = signal([]);
+
   constructor(config: ApiConfiguration, private oauthService: OAuthService, private zone: NgZone, http: HttpClient) {
     super(config,http)
   }
 
   public getServerSentEvent(): Observable<any> {
-    const url = 'http://localhost:8082/humanresources/street/select';
-    var token = this.oauthService.getAccessToken();
     return new Observable(observer => {
-      const eventSource = new EventSource(url); // O usar fetch para headers
-      // Nota: EventSource nativo no permite headers.
-      // Solución real con fetch para incluir token:
-      this.fetchWithToken(url, token, observer);
+      this.fetchWithToken(observer);
     });
   }
 
-  private async fetchWithToken(url: string, token: string, observer: any) {
+  private async fetchWithToken(observer: any) {
+    const path = '/humanresources/street/select';
+    const url = this.config.rootUrl + path;
+    var token = this.oauthService.getAccessToken();
     const response = await fetch(url, {
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -43,7 +45,9 @@ export class SseService extends BaseService{
 
       const chunk = decoder.decode(value);
       // Procesar 'chunk' (parar por \n\n, parsear JSON, etc.)
-      this.zone.run(() => observer.next(chunk));
+      const valor = chunk.replace("data:","");
+      //this.zone.run(() => observer.next(valor));
+      this.zone.run(()=>observer.next(valor));
     }
     observer.complete();
   }
@@ -58,15 +62,8 @@ export class SseService extends BaseService{
     return this.http.request(req).pipe(
       filter((event: HttpEvent<any>) => event.type === HttpEventType.DownloadProgress),
       map((event) => {
-        // Analizar el texto recibido (debe ser formato "data: ... \n\n")
-        return this.parseSseEvent(event);
+        return event;
       })
     );
-  }
-
-  private parseSseEvent(text: any): any {
-    // Lógica para extraer el JSON del evento SSE
-    // Se recomienda una librería o parsing manual sólido
-    return text;
   }
 }
