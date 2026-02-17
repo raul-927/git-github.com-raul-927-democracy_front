@@ -1,6 +1,6 @@
 import { Injectable, NgZone, signal, WritableSignal } from '@angular/core';
 import { Observable } from 'rxjs';
-import {OAuthService} from 'angular-oauth2-oidc';
+import { OAuthService } from 'angular-oauth2-oidc';
 import { HttpClient, HttpRequest, HttpEvent, HttpEventType } from '@angular/common/http';
 import { filter, map } from 'rxjs/operators';
 import { BaseService } from './base-service';
@@ -9,12 +9,12 @@ import { StreetResultResponse } from '../response/street-result-response';
 @Injectable({
   providedIn: 'root'
 })
-export class SseService extends BaseService{
+export class SseService extends BaseService {
 
-public tableData: WritableSignal<StreetResultResponse[]> = signal([]);
+  public tableData: WritableSignal<StreetResultResponse[]> = signal([]);
 
   constructor(config: ApiConfiguration, private oauthService: OAuthService, private zone: NgZone, http: HttpClient) {
-    super(config,http)
+    super(config, http)
   }
 
   public getServerSentEvent(): Observable<any> {
@@ -46,9 +46,9 @@ public tableData: WritableSignal<StreetResultResponse[]> = signal([]);
 
       const chunk = decoder.decode(value);
       // Procesar 'chunk' (parar por \n\n, parsear JSON, etc.)
-      const valor = chunk.replace("data:","");
+      const valor = chunk.replace("data:", "");
       //this.zone.run(() => observer.next(valor));
-      this.zone.run(()=>observer.next(valor));
+      this.zone.run(() => observer.next(valor));
     }
     observer.complete();
   }

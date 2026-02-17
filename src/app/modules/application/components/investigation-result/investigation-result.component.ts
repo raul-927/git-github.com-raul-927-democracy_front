@@ -29,7 +29,7 @@ export class InvestigationResultComponent implements OnInit, OnChanges, OnDestro
   }
   ngOnChanges(changes: SimpleChanges): void {
     this.investigationResultSseService.getServerSentEvent().subscribe(res => {
-      console.log("RES: "+ JSON.stringify(res));
+      console.log("RES: " + JSON.stringify(res));
       let investigationResult: InvestigationResultDomain = JSON.parse(res);
       console.log('INVESTIGATION_RESULT: ' + JSON.stringify(investigationResult));
       this.investigationResultList.push(investigationResult);
@@ -47,13 +47,13 @@ export class InvestigationResultComponent implements OnInit, OnChanges, OnDestro
 
 
   ngOnInit(): void {
-    this.investigationResultService.obtainInvestigationResult$Response().subscribe(res=>{
+    this.investigationResultService.obtainInvestigationResult$Response().subscribe(res => {
       //let investigationResult: InvestigationResultDomain = JSON.parse(res.body);
       console.log('INVESTIGATION_RESULT: ' + JSON.stringify(res.body));
       this.investigationResultList = res.body;
     })
     this.investigationResultSseService.getServerSentEvent().subscribe(res => {
-      console.log("RES: "+ JSON.stringify(res));
+      console.log("RES: " + JSON.stringify(res));
       let investigationResult: InvestigationResultDomain = JSON.parse(res);
       console.log('INVESTIGATION_RESULT: ' + JSON.stringify(investigationResult));
       this.investigationResultList.push(investigationResult);
@@ -61,14 +61,14 @@ export class InvestigationResultComponent implements OnInit, OnChanges, OnDestro
 
   }
 
-  getItemColor(investigation: InvestigationResultDomain): boolean{
+  getItemColor(investigation: InvestigationResultDomain): boolean {
     let retornarValor = false;
-    if(investigation.isApprove=== true){
-      retornarValor =  true;
-    }else{
+    if (investigation.isApprove === true) {
+      retornarValor = true;
+    } else {
       retornarValor = false;
     }
-    console.log("RETORNAR VALOR: "+retornarValor);
+    console.log("RETORNAR VALOR: " + retornarValor);
     return retornarValor;
   }
 

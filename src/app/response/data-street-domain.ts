@@ -1,5 +1,5 @@
 import { StreetDomain } from "./street-domain";
 
-export class DataStreetDomain{
+export class DataStreetDomain {
   data?: StreetDomain;
 }

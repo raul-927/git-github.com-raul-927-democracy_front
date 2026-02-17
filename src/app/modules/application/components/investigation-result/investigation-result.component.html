@@ -1,15 +1,14 @@
 <table class="table table-hover table-bordered well well-sm">
-    <thead>
-
-      <td><h2>Nro cédula</h2></td>
-        <td><h2>Observaciones</h2></td>
-         <td><h2>Puntaje</h2></td>
-         <td><h2>Estado</h2></td>
-    </thead>
+  <thead>
+    <td><h2>Nro cédula</h2></td>
+    <td><h2>Observaciones</h2></td>
+    <td><h2>Puntaje</h2></td>
+    <td><h2>Estado</h2></td>
+  </thead>
   <tbody>
-    <tr *ngFor="let item of investigationResultList, let i=index">
+    <tr *ngFor="let item of investigationResultList; let i = index">
       <td>
-        {{item.cedula}}
+        {{ item.cedula }}
         <!--<input
             class="form-control"
             id   ="type_{{item.streetId}}"
@@ -18,7 +17,7 @@
       </td>
 
       <td>
-        {{item.observation}}
+        {{ item.observation }}
         <!--<input
             class="form-control"
             id   ="type_{{item.streetId}}"
@@ -26,16 +25,20 @@
             [value]="item.streetType">-->
       </td>
       <td>
-        {{item.score}}
+        {{ item.score }}
         <!--<input
             class="form-control"
             id   ="type_{{item.streetId}}"
             name ="type_{{item.streetId}}"
             [value]="item.streetType">-->
       </td>
-      <td >
-        <div *ngIf="getItemColor(item); else elseBlock"><div [ngStyle]="{'color': 'green'}">Aprobado</div></div>
-        <ng-template #elseBlock><div [ngStyle]="{'color': 'red'}">Rechazado</div></ng-template>
+      <td>
+        <div *ngIf="getItemColor(item); else elseBlock">
+          <div [ngStyle]="{ color: 'green' }">Aprobado</div>
+        </div>
+        <ng-template #elseBlock
+          ><div [ngStyle]="{ color: 'red' }">Rechazado</div></ng-template
+        >
         <!--<input
             class="form-control"
             id   ="type_{{item.streetId}}"

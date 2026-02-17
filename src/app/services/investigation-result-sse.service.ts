@@ -1,6 +1,6 @@
-import { Injectable, NgZone} from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Observable } from 'rxjs';
-import {OAuthService} from 'angular-oauth2-oidc';
+import { OAuthService } from 'angular-oauth2-oidc';
 import { HttpClient, HttpRequest, HttpEvent, HttpEventType } from '@angular/common/http';
 import { filter, map } from 'rxjs/operators';
 import { BaseService } from './base-service';
@@ -8,10 +8,10 @@ import { ApiConfiguration } from '../config/api-configuration';
 @Injectable({
   providedIn: 'root'
 })
-export class InvestigationResultSseService extends BaseService{
+export class InvestigationResultSseService extends BaseService {
 
   constructor(config: ApiConfiguration, private oauthService: OAuthService, private zone: NgZone, http: HttpClient) {
-    super(config,http)
+    super(config, http)
   }
 
   public getServerSentEvent(): Observable<any> {
@@ -43,10 +43,10 @@ export class InvestigationResultSseService extends BaseService{
 
       const chunk = decoder.decode(value);
       // Procesar 'chunk' (parar por \n\n, parsear JSON, etc.)
-      let valor = chunk.replace("\n\n","");
-      valor = valor.replace("data:","");
+      let valor = chunk.replace("\n\n", "");
+      valor = valor.replace("data:", "");
       //this.zone.run(() => observer.next(valor));
-      this.zone.run(()=>observer.next(valor));
+      this.zone.run(() => observer.next(valor));
     }
     observer.complete();
   }
