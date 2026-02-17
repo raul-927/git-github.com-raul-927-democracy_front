@@ -27,7 +27,7 @@ export class InvestigationResultService extends BaseService{
   }
 
   obtainInvestigationResult$Response(params?: ObtainInvestigationResult$Params, context?: HttpContext):Observable<StrictHttpResponse<any>>{
-    return obtainInvestigationResultData(this.http, this.rootUrl, params, context);
+    return obtainInvestigationResultData(this.http, this.rootUrl, context);
 
   }
 }

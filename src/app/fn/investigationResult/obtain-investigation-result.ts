@@ -27,16 +27,11 @@ export function getInvestigationResult (http: HttpClient, rootUrl: string, param
   );
 }
 
-export function obtainInvestigationResultData (http: HttpClient, rootUrl: string, params?: ObtainInvestigationResult$Params, context?: HttpContext): Observable<StrictHttpResponse<InvestigationResultResponse>> {
+export function obtainInvestigationResultData (http: HttpClient, rootUrl: string, context?: HttpContext): Observable<StrictHttpResponse<InvestigationResultResponse>> {
   const rb = new RequestBuilder(rootUrl, obtainInvestigationResultData.PATH, 'POST');
-  if (params) {
-    rb.body(params.body, 'application/json');
-  }else{
-    rb.body({}, 'application/json');
-  }
 
   return http.request(
-    rb.build({ responseType: 'json', accept: 'application/json', context })
+    rb.build({ responseType: 'json', accept:'application/json', context })
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
